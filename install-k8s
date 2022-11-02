@@ -1,3 +1,33 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@jamesvthompson 
+run-ai
+/
+docs
+Public
+Code
+Issues
+Pull requests
+2
+Discussions
+Actions
+Projects
+Security
+Insights
+docs/docs/admin/runai-setup/cluster-setup/install-k8s.md
+@yarongol
+yarongol no
+Latest commit a3f9c17 on Sep 5
+ History
+ 2 contributors
+@yarongol@eshelman
+147 lines (104 sloc)  5.03 KB
+
 # Native Kubernetes Installation
 
 Kubernetes is composed of master(s) and workers. The instructions below are for creating a bare-bones installation of a single master and several workers for __testing__ purposes. For a more complex, __production-grade__, Kubernetes installation, use tools such as Rancher Kubernetes Engine, or review [Kubernetes documentation](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/){target=_blank} to learn how to customize the native installation.
@@ -36,16 +66,13 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 net.ipv4.ip_forward = 1
 EOF'
-
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
-
 sudo apt-get update
 sudo apt-get install -y kubelet=1.23.5-00 kubeadm=1.23.5-00 kubectl=1.23.5-00
-
 sudo swapoff -a
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --kubernetes-version=v1.23.5 --token-ttl 180h
 ```
@@ -104,7 +131,6 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 net.ipv4.ip_forward = 1
 EOF'
-
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
@@ -112,7 +138,6 @@ deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 sudo apt-get update
 sudo apt-get install -y kubelet=1.23.5-00 kubeadm=1.23.5-00
-
 sudo swapoff -a
 ```
 
@@ -144,3 +169,19 @@ sudo apt-mark hold kubeadm kubelet kubectl
 ```
 
 
+
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+docs/install-k8s.md at a3f9c1723f38b13428a4e8f2f91bf23af274efb6 · run-ai/docs
