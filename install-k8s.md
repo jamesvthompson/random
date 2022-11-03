@@ -18,7 +18,7 @@ sudo sh get-docker.sh
 Change Docker to use `systemd` by editing 
 
 ```
-/etc/docker/daemon.json 
+sudo vi /etc/docker/daemon.json 
 ```
 
 and adding:
