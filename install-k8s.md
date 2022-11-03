@@ -45,7 +45,9 @@ EOF
 
 sudo apt-get update
 sudo apt-get install -y kubelet=1.23.5-00 kubeadm=1.23.5-00 kubectl=1.23.5-00
+```
 
+```
 sudo swapoff -a
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --kubernetes-version=v1.23.5 --token-ttl 180h
 ```
@@ -143,4 +145,32 @@ To avoid accidental upgrade of Kubernetes binaries, it is recommended to _hold_ 
 sudo apt-mark hold kubeadm kubelet kubectl
 ```
 
+## Install NVIDIA GPU Operator
 
+The preferred method to deploy the GPU Operator is using helm.
+
+```
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 \
+   && chmod 700 get_helm.sh \
+   && ./get_helm.sh
+```
+
+```
+helm repo add nvidia https://helm.ngc.nvidia.com/nvidia \
+   && helm repo update
+```
+
+Bare-metal/Passthrough with default configurations on Ubuntu¶
+In this scenario, the default configuration options are used:
+
+```
+helm install --wait --generate-name \
+     -n gpu-operator --create-namespace \
+     nvidia/gpu-operator
+```
+
+Now make sure all pods are running in the kube-system kube-flannel and gpu-operator namespaces 
+
+```
+kubectl get pods -A
+```
