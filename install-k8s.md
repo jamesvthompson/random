@@ -79,8 +79,19 @@ kubectl get nodes
 ```
 Verify that the master node is ready
 
+## Single Node Taint Removal
 
-
+```
+kubectl describe node <nodename> | grep Taints
+```
+You will get something like this (master or worker_node) 
+```
+Taints:             node-role.kubernetes.io/master:NoSchedule
+```
+To remove taint from node just run
+```
+kubectl taint node <nodename> node-role.kubernetes.io/master:NoSchedule-
+```
 ## Run on Kubernetes Workers
 
 For Kubernetes workers with GPU, you must install the NVIDIA prerequisites. We recommend using the NVIDIA GPU Operator __on top__ of Kubernetes. For further details see [NVIDIA prerequisites](cluster-install.md#step-2-nvidia)
