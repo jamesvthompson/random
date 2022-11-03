@@ -15,7 +15,13 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 ```
 
-Change Docker to use `systemd` by editing `/etc/docker/daemon.json` and adding:
+Change Docker to use `systemd` by editing 
+
+```
+/etc/docker/daemon.json 
+```
+
+and adding:
 
 ``` JSON title="/etc/docker/daemon.json"
 {
