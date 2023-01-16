@@ -20,7 +20,7 @@ sudo systemctl start kubelet
 sudo systemctl enable kubelet
 
 # Configure kubeadm
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --token-ttl=180h --cgroup-driver=systemd
+sudo kubeadm init --pod-network-cidr=10.244.0/16 --token-ttl=180h
 
 # Configure Flannel networking
 sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
@@ -29,6 +29,18 @@ sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Do
 mkdir -p ~/.kube
 sudo cp -i /etc/kubernetes/admin.conf ~/.kube/config
 sudo chown $(id -u):$(id -g) ~/.kube/config
+
+# Check cgroup driver and update kubelet service
+cgroup_driver=$(cat /proc/1/cgroup | grep ":/" | cut -d: -f2)
+if [ "$cgroup_driver" == "systemd" ]; then
+    sudo sed -i "s/cgroup-driver=.*/cgroup-driver=systemd/g" /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+    sudo systemctl daemon-reload
+    sudo systemctl restart kubelet
+elif [ "$cgroup_driver" == "cgroupfs" ]; then
+    sudo sed -i "s/cgroup-driver=.*/cgroup-driver=cgroupfs/g" /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+    sudo systemctl daemon-reload
+    sudo systemctl restart kubelet
+fi
 
 # Install Helm
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
