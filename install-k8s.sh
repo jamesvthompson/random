@@ -15,15 +15,18 @@ sudo apt-get update && sudo apt-get install -y apt-transport-https
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update
-sudo apt-get install -y kubelet=1.23.5-00 kubeadm=1.23.5-00 kubectl=1.23.5-00
-sudo systemctl start kubelet
-sudo systemctl enable kubelet
+sudo apt-get install -y kubelet kubeadm kubectl
 
 # Configure kubeadm
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --token-ttl=180h
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --token-ttl=180h --cgroup-driver=systemd
 
 # Configure Flannel networking
 sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
+
+# Copy kubeadm config to non-sudo user's .kube directory
+mkdir -p ~/.kube
+sudo cp -i /etc/kubernetes/admin.conf ~/.kube/config
+sudo chown $(id -u):$(id -g) ~/.kube/config
 
 # Install Helm
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
