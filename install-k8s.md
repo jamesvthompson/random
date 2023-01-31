@@ -162,6 +162,21 @@ To avoid accidental upgrade of Kubernetes binaries, it is recommended to _hold_ 
 sudo apt-mark hold kubeadm kubelet kubectl
 ```
 
+## Install Nginx
+
+Run:ai requires an ingress controller as a prerequisite. The Run:ai cluster installation configures one or more ingress objects on top of the controller.
+
+There are many ways to install and configure an ingress controller and configuration is environment-dependent. A simple solution is to install & configure NGINX:
+
+```
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+helm upgrade -i nginx-ingress ingress-nginx/ingress-nginx   \
+    --namespace nginx-ingress --create-namespace \
+    --set controller.kind=DaemonSet \
+    --set controller.daemonset.useHostPort=true
+```
+
 ## Install NVIDIA GPU Operator
 
 The preferred method to deploy the GPU Operator is using helm.
