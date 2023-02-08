@@ -141,16 +141,6 @@ Alternatively, if you are the root user, you can run:
 ```
 export KUBECONFIG=/etc/kubernetes/admin.conf
 ```
-Then you can join any number of worker nodes by running the following on each as root
-```
-kubeadm join 102.130.122.60:6443 --token s3v1c6.dgufsxikpbn9kflf \
-        --discovery-token-ca-cert-hash sha256:b8c63b1aba43ba228c9eb63133df81632a07dc780a92ae2bc5ae101ada623e00
-```
-You will see a kubeadm join at the end of the output. Copy and save it in some file. We will have to run this command on the worker node to allow it to join the cluster. But fear not, if you forget to save it, or misplace it, you can also regenerate it using this command
-```
-sudo kubeadm token create --print-join-command
-```
-
 4. Deploy a pod network to our cluster. This is required to interconnect the different Kubernetes components
 ```
 kubectl apply -f https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml
@@ -188,6 +178,16 @@ kube-system   kube-controller-manager-master-node   1/1     Running   0         
 kube-system   kube-flannel-ds-jxbvx                 1/1     Running   0          6m35s
 kube-system   kube-proxy-mhfqh                      1/1     Running   0          10m
 kube-system   kube-scheduler-master-node            1/1     Running   0          11m
+```
+# Step 4. Adding nodes tothe cluster
+Then you can join any number of worker nodes by running the following on each as root
+```
+kubeadm join 102.130.122.60:6443 --token s3v1c6.dgufsxikpbn9kflf \
+        --discovery-token-ca-cert-hash sha256:b8c63b1aba43ba228c9eb63133df81632a07dc780a92ae2bc5ae101ada623e00
+```
+You will see a kubeadm join at the end of the output. Copy and save it in some file. We will have to run this command on the worker node to allow it to join the cluster. But fear not, if you forget to save it, or misplace it, you can also regenerate it using this command
+```
+sudo kubeadm token create --print-join-command
 ```
 
 
