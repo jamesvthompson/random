@@ -1,6 +1,6 @@
 # Deploy Kubernetes Cluster on Ubuntu 20.04 with Containerd
 
-In this guide we’ll go through all the steps you need to set up a Kubernetes cluster Ubuntu 20.04
+In this guide we’ll go through all the steps you need to set up a Kubernetes cluster Ubuntu 20.04. Kubernetes is composed of master(s) and workers. The instructions below are for creating a bare-bones installation of a single master and several workers for __testing purposes__ only.
 
 # Step 1. Install containerd
 Follow these steps on all servers
@@ -189,7 +189,3 @@ You will see a kubeadm join at the end of the output. Copy and save it in some f
 ```
 sudo kubeadm token create --print-join-command
 ```
-
-
-
-
