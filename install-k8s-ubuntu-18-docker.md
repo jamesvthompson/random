@@ -1,6 +1,5 @@
 # Kubernetes Installation with Docker
-
-Kubernetes is composed of master(s) and workers. The instructions below are for creating a bare-bones installation of a single master and several workers for __testing__ purposes. For a more complex, __production-grade__, Kubernetes installation, use tools such as Rancher Kubernetes Engine, or review [Kubernetes documentation](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/) to learn how to customize the native installation.
+This guide is for testing purposes only. Use information and scripts at your own risk. The information is not guaranteed to be error-free, secure, or up-to-date, and may not reflect the latest updates and best practices. The authors do not assume responsibility for consequences from usage.
 
 ## Prerequisites:
 
