@@ -181,7 +181,7 @@ kube-system   kube-flannel-ds-jxbvx                 1/1     Running   0         
 kube-system   kube-proxy-mhfqh                      1/1     Running   0          10m
 kube-system   kube-scheduler-master-node            1/1     Running   0          11m
 ```
-## Step 4. Adding nodes tothe cluster
+## Step 4. Adding nodes to the cluster
 Then you can join any number of worker nodes by running the following on each as root
 ```
 kubeadm join 102.130.122.60:6443 --token s3v1c6.dgufsxikpbn9kflf \
