@@ -67,7 +67,7 @@ echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt
 
 # Update the system and install the 3 Kubernetes modules
 sudo apt update -y
-sudo apt install -y kubelet kubeadm kubectl
+sudo apt install -y kubelet=1.24.10-00 kubeadm=1.24.10-00 kubectl=1.24.10-00
 
 # Disable swap on both machines to allow kubelet to work properly
 sudo swapoff –a
