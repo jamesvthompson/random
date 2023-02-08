@@ -82,6 +82,3 @@ $join_command
 
 # Check whether all the default pods are running
 kubectl get pods -A
-
-fstab 
-
