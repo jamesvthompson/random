@@ -1,8 +1,10 @@
-# Deploy Kubernetes Cluster on Ubuntu 20.04 with Containerd
+# Kubernetes Installation with Containerd
+This guide is for testing purposes only. Use information and scripts at your own risk. The information is not guaranteed to be error-free, secure, or up-to-date, and may not reflect the latest updates and best practices. The authors do not assume responsibility for consequences from usage.
 
-In this guide we’ll go through all the steps you need to set up a Kubernetes cluster Ubuntu 20.04. Kubernetes is composed of master(s) and workers. The instructions below are for creating a bare-bones installation of a single master and several workers for __testing purposes__ only.
+## Prerequisites:
+In this guide we’ll go through all the steps you need to set up a Kubernetes cluster Ubuntu 20.04. Kubernetes is composed of master(s) and workers. The instructions below are for creating a bare-bones installation of a single master and several worker.
 
-# Step 1. Install containerd
+## Step 1. Install containerd
 Follow these steps on all servers
 
 1. Load the br_netfilter module required for networking
@@ -88,7 +90,7 @@ Expect output similar to this:
 root       63087       1  0 13:16 ?        00:00:00 /usr/bin/containerd
 ```
 
-# Step 2. Install Kubernetes
+## Step 2. Install Kubernetes
 With our container runtime installed and configured, we are ready to install Kubernetes
 
 1. Add the repository key and the repository
@@ -114,7 +116,7 @@ sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 sudo systemctl enable kubelet
 ```
 
-# Step 3. Setting up the cluster
+## Step 3. Setting up the cluster
 With our container runtime and Kubernetes modules installed, we are ready to initialize our Kubernetes cluster
 
 1. Run the following command on the master node to allow Kubernetes to fetch the required images before cluster initialization
@@ -179,7 +181,7 @@ kube-system   kube-flannel-ds-jxbvx                 1/1     Running   0         
 kube-system   kube-proxy-mhfqh                      1/1     Running   0          10m
 kube-system   kube-scheduler-master-node            1/1     Running   0          11m
 ```
-# Step 4. Adding nodes tothe cluster
+## Step 4. Adding nodes tothe cluster
 Then you can join any number of worker nodes by running the following on each as root
 ```
 kubeadm join 102.130.122.60:6443 --token s3v1c6.dgufsxikpbn9kflf \
