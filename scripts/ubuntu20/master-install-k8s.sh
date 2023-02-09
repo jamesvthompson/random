@@ -73,7 +73,7 @@ sudo apt update -y
 sudo apt install -y kubelet=1.24.10-00 kubeadm=1.24.10-00 kubectl=1.24.10-00
 
 # Disable swap on both machines to allow kubelet to work properly
-sudo swapoff –a
+sudo swapoff -a
 sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 
 # Enable the kubelet service on both systems
