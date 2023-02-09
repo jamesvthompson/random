@@ -1,7 +1,7 @@
 #!/bin/bash
-# For Testing Only: Guides and Scripts Provided
-# Use at Your Own Risk, No Production Deployment
-# Authors Don't Assume Responsibility for Consequences
+# This script is intended solely for testing purposes and should not be used in a production environment. 
+# The author of this script assumes no responsibility for any consequences arising from the use of this script. 
+# Use at your own risk.
 
 # Load the br_netfilter module required for networking
 sudo modprobe overlay
