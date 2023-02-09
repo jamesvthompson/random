@@ -81,7 +81,7 @@ sudo systemctl enable kubelet
 
 # Join the cluster using the kubeadm join command
 read -p "Enter the kubeadm join command from the master node: " join_command
-$join_command
+sudo $join_command
 
 # Check whether all the default pods are running
 watch kubectl get pods -A
