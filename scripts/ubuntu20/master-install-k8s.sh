@@ -94,4 +94,4 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl apply -f https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml
 
 # Check whether all the default pods are running
-kubectl get pods -A
+watch -n .5 kubectl get pods -A
