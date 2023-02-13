@@ -15,7 +15,7 @@ helm install --wait --generate-name \
      --set driver.enabled=false
 
 # Upgrade or install Ingress Nginx chart
-helm install -i nginx-ingress ingress-nginx/ingress-nginx \
+helm upgrade -i nginx-ingress ingress-nginx/ingress-nginx \
     --namespace nginx-ingress --create-namespace \
     --set controller.kind=DaemonSet \
     --set controller.daemonset.useHostPort=true
