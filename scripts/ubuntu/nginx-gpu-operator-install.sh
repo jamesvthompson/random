@@ -1,23 +1,18 @@
 #!/bin/bash
 
 # Install Helm 3
-curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 \
-   && chmod 700 get_helm.sh \
-   && ./get_helm.sh
+curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
-# Add and update NVIDIA Helm repository
-helm repo add nvidia https://helm.ngc.nvidia.com/nvidia \
-   && helm repo update
+# Add NVIDIA and Ingress Nginx repositories and update them together
+helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
 
 # Install NVIDIA GPU Operator chart
 helm install --wait --generate-name \
      -n gpu-operator --create-namespace \
      nvidia/gpu-operator \
      --set driver.enabled=false
-
-# Add and update Ingress Nginx Helm repository
-helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx \
-   && helm repo update
 
 # Upgrade or install Ingress Nginx chart
 helm upgrade -i nginx-ingress ingress-nginx/ingress-nginx \
